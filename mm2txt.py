@@ -104,7 +104,7 @@ def txt_encoder(filename, deck_pairs):
 
 def main():
     """ Transform freeplane mindmaps to text for anki import
-    example:
+    Example:
     python mm2txt.py [-idt] filename [exclude_condition [join_condition]]
 
     outputs file with filename_deck.txt is in same directory as the source mindmap
@@ -114,7 +114,7 @@ def main():
     -t  text mode of parsing
     -s  style mode of parsing
     -i  inverse cards
-    -d  doublicate inversed cards (works only with i)
+    -d  doublicate inversed cards
     PARAMETERS:
     filename          - name of freeplane mindmap file
     exclude_condition - text prefix in node name (or style) of nodes you want to exclude from decks
@@ -158,7 +158,7 @@ def main():
         parse_mode = auto_mode_select(filename)
     parse_init(parse_mode, join_condition, exclude_condition)
     deck = xml_decoder(filename)
-    if inverse:
+    if inverse or doublicate:
         deck = list(deck).extend(list(map(reversed,deck))) if doublicate else list(map(reversed,deck))
     txt_encoder(filename+'_deck.txt', deck)
     return 0
